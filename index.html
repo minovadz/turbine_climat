@@ -9,7 +9,7 @@
 <style>
   :root{
     --navy:#0D1B2A;
-    --red:#D6293E;
+    --red:#1565C0;
     --green:#2FAE60;
     --paper:#FFFFFF;
     --muted:#6B7785;
@@ -40,13 +40,17 @@
   .sizes-strip h4{ font-size:13.5px; font-weight:900; color:var(--navy); margin-bottom:2px; }
   .sizes-strip p{ font-size:11px; color:#666; margin-bottom:8px; }
   .sizes-strip img{ max-width:100%; width:360px; height:auto; }
-  .size-inline-wrap{ display:flex; align-items:center; gap:10px; }
+  .size-inline-wrap{ display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
   .size-inline-wrap select{ flex:1; }
   .size-thumb{ width:52px; height:auto; border-radius:8px; flex-shrink:0; }
+  .bestseller-badge{
+    display:none; background:#FFF4D6; color:#8A5A00; font-size:11.5px; font-weight:800;
+    padding:4px 10px; border-radius:100px; width:100%;
+  }
 
   .order-box{
     margin:0 16px; border:2px dashed var(--red); border-radius:14px; padding:18px 16px 20px;
-    background:#FFFBFB;
+    background:#F5F9FE;
   }
   .order-box h3{ font-size:15px; font-weight:900; text-align:center; margin-bottom:14px; color:var(--navy); }
 
@@ -101,7 +105,7 @@
   }
   .delivery-toggle input{ width:auto; accent-color:var(--red); margin:0; }
   .delivery-toggle input:checked + span{ color:var(--red); }
-  .delivery-toggle label:has(input:checked){ border-color:var(--red); background:#FFF5F6; }
+  .delivery-toggle label:has(input:checked){ border-color:var(--red); background:#EAF3FC; }
 
   /* collapsible price table */
   .price-details{ margin:8px 0 4px; }
@@ -131,26 +135,6 @@
   .pb-row{ display:flex; justify-content:space-between; padding:5px 0; color:var(--muted); }
   .pb-total{ border-top:1px dashed #D8DEE3; margin-top:4px; padding-top:8px; font-weight:900; color:var(--navy); font-size:15px; }
 
-  /* testimonials */
-  .testimonials{ padding:6px 16px 20px; }
-  .testimonials h3{ font-size:15px; font-weight:900; margin-bottom:10px; color:var(--navy); }
-  .t-scroll-wrap{ position:relative; }
-  .t-scroll{
-    display:flex; gap:10px; overflow-x:hidden; scroll-behavior:smooth; padding-bottom:4px;
-  }
-  .t-card{
-    flex:0 0 auto; width:200px; background:#F9FAFB; border:1px solid var(--line); border-radius:12px;
-    padding:12px 14px; font-size:12.5px; color:#3A4652;
-  }
-  .t-card .stars{ color:#F5A623; font-size:12px; margin-bottom:6px; }
-  .t-card .name{ margin-top:8px; font-weight:800; color:var(--navy); font-size:12px; }
-  .t-nav{ display:flex; justify-content:center; gap:12px; margin-top:10px; }
-  .t-nav button{
-    width:34px; height:34px; border-radius:50%; border:1.5px solid #DDE3E8; background:#fff;
-    color:var(--navy); font-size:18px; line-height:1; cursor:pointer; display:flex;
-    align-items:center; justify-content:center; padding:0;
-  }
-  .t-nav button:active{ background:#F3F6F8; }
 
   /* product photo carousel - one image at a time, swipe or tap arrows */
   .carousel-wrap{ position:relative; margin:4px 16px 4px; }
@@ -178,9 +162,38 @@
   .carousel-dots span{ width:6px; height:6px; border-radius:50%; background:#D8DEE3; transition:background .2s, width .2s; }
   .carousel-dots span.active{ background:var(--red); width:16px; border-radius:4px; }
 
+  /* الأسئلة الشائعة */
+  .faq{ padding:6px 16px 20px; }
+  .faq h3{ font-size:15px; font-weight:900; margin-bottom:10px; color:var(--navy); }
+  .faq details{
+    border:1px solid var(--line); border-radius:10px; padding:10px 12px; margin-bottom:8px; background:#fff;
+  }
+  .faq summary{
+    list-style:none; cursor:pointer; font-size:13.5px; font-weight:800; color:var(--navy);
+    display:flex; align-items:center; gap:8px;
+  }
+  .faq summary::-webkit-details-marker{ display:none; }
+  .faq summary::after{ content:"▾"; margin-inline-start:auto; color:var(--muted); }
+  .faq details[open] summary::after{ content:"▴"; }
+  .faq .faq-answer{ font-size:13px; color:var(--muted); margin-top:8px; line-height:1.7; }
+  .faq .faq-note{ font-size:12px; color:var(--navy); background:#F5F9FE; border-radius:8px; padding:8px 10px; margin-top:8px; }
+
+  .space-list{ margin-top:8px; display:flex; flex-direction:column; gap:6px; }
+  .space-list div{
+    background:#F5F9FE; border-radius:8px; padding:7px 10px; font-size:12.5px; color:var(--navy); font-weight:700;
+  }
+  .size-compare{
+    display:flex; align-items:flex-end; justify-content:space-between; gap:6px; margin:10px 0 4px;
+    padding:10px 6px 4px; background:#F5F9FE; border-radius:10px;
+  }
+  .size-compare .sc-item{ display:flex; flex-direction:column; align-items:center; gap:5px; flex:1; }
+  .size-compare .sc-circle{
+    border-radius:50%; background:var(--red); opacity:.85;
+  }
+  .size-compare .sc-label{ font-size:10px; font-weight:800; color:var(--navy); white-space:nowrap; }
   /* countdown offer bar */
   .offer-bar{
-    margin:0 16px 10px; background:#FFF5F6; border:1px solid #F7C6CB; border-radius:10px;
+    margin:0 16px 10px; background:#EAF3FC; border:1px solid #BBD6F0; border-radius:10px;
     padding:9px 12px; text-align:center; font-size:12.5px; font-weight:800; color:var(--red);
   }
   .offer-bar .countdown{ font-weight:900; font-size:14px; direction:ltr; display:inline-block; }
@@ -216,10 +229,10 @@ src="https://www.facebook.com/tr?id=1677998319917755&ev=PageView&noscript=1"
   <div class="title">Turbine Climat Cool — تهوية وتبريد قوي لكل مساحة</div>
 
   <div class="price-row">
-    <span class="price" id="displayPrice">7,900 DA</span>
+    <span class="price" id="displayPrice">8,300 DA</span>
   </div>
   <div class="offer-bar">
-    ⏳ العرض ينتهي خلال: <span class="countdown" id="countdownTimer">--:--:--</span> — السعر سيرتفع بعدها
+    ⏳ الستوك محدود، احجز طلبك الآن
   </div>
 
   <div class="badges">
@@ -256,13 +269,14 @@ src="https://www.facebook.com/tr?id=1677998319917755&ev=PageView&noscript=1"
       <div class="size-inline-wrap">
         <img src="data:image/webp;base64,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" alt="توربينة تهوية" class="size-thumb" width="52" height="48" loading="lazy">
         <select id="size" name="product_size" required>
-        <option value="100mm - 7900 DA" data-price="7900">100mm — 7,900 DA (منازل/مكاتب صغيرة)</option>
-        <option value="125mm - 9300 DA" data-price="9300">125mm — 9,300 DA (منازل/محلات صغيرة)</option>
-        <option value="150mm - 11500 DA" data-price="11500">150mm — 11,500 DA (مطاعم/مقاهي)</option>
-        <option value="200mm - 13800 DA" data-price="13800">200mm — 13,800 DA (مطاعم/ورش)</option>
-        <option value="250mm - 34950 DA" data-price="34950">250mm — 34,950 DA (صالات رياضية/مطاعم كبيرة)</option>
-        <option value="315mm - 44800 DA" data-price="44800">315mm — 44,800 DA (صالات رياضية كبيرة/مستودعات)</option>
+        <option value="100mm - 8300 DA" data-price="8300">100mm — 8,300 DA (منازل/مكاتب صغيرة)</option>
+        <option value="125mm - 9400 DA" data-price="9400">125mm — 9,400 DA (منازل/محلات صغيرة)</option>
+        <option value="150mm - 10900 DA" data-price="10900">150mm — 10,900 DA (مطاعم/مقاهي)</option>
+        <option value="200mm - 14200 DA" data-price="14200">200mm — 14,200 DA (مطاعم/ورش)</option>
+        <option value="250mm - 34500 DA" data-price="34500">250mm — 34,500 DA ⭐ الأكثر طلبًا (صالات رياضية/مطاعم كبيرة)</option>
+        <option value="315mm - 43800 DA" data-price="43800">315mm — 43,800 DA ⭐ الأكثر طلبًا (صالات رياضية كبيرة/مستودعات)</option>
         </select>
+        <div class="bestseller-badge" id="bestsellerBadge">⭐ الأكثر طلبًا</div>
       </div>
 
       <label for="name">الاسم الكامل</label>
@@ -290,10 +304,13 @@ src="https://www.facebook.com/tr?id=1677998319917755&ev=PageView&noscript=1"
           <span>🏢 مكتب (أرخص)</span>
         </label>
       </div>
+
+      <label for="note">ملاحظة إضافية (اختياري)</label>
+      <textarea id="note" name="extra_note" placeholder="مثال: يفضل التوصيل مساءً..."></textarea>
     </form>
 
     <div class="price-breakdown" id="priceBreakdown">
-      <div class="pb-row"><span>سعر المنتج</span><span id="pbProduct">7,900 DA</span></div>
+      <div class="pb-row"><span>سعر المنتج</span><span id="pbProduct">8,300 DA</span></div>
       <div class="pb-row"><span>سعر التوصيل</span><span id="pbDelivery">اختر ولايتك</span></div>
       <div class="pb-row pb-total"><span>المجموع</span><span id="pbTotal">—</span></div>
     </div>
@@ -315,31 +332,54 @@ src="https://www.facebook.com/tr?id=1677998319917755&ev=PageView&noscript=1"
     </ul>
   </div>
 
-  <div class="testimonials">
-    <h3>ماذا يقول عملاؤنا؟</h3>
-    <div class="t-scroll-wrap">
-      <div class="t-scroll" id="tScroll">
-        <div class="t-card">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          "الحمد لله، ركّبت الوحدة ومشاء الله، ما ندمتش."
-          <div class="name">— زبون من سطيف</div>
+  <div class="faq">
+    <h3>الأسئلة الشائعة</h3>
+
+    <details open>
+      <summary>📐 ما هو المقاس المناسب لمساحتي؟</summary>
+      <div class="faq-answer">
+        كل مقاس مخصص لمساحة معينة، اختر المقاس المناسب لمساحة مكانك مباشرة:
+        <div class="size-compare">
+          <div class="sc-item"><div class="sc-circle" style="width:22px;height:22px;"></div><span class="sc-label">100mm</span></div>
+          <div class="sc-item"><div class="sc-circle" style="width:28px;height:28px;"></div><span class="sc-label">125mm</span></div>
+          <div class="sc-item"><div class="sc-circle" style="width:33px;height:33px;"></div><span class="sc-label">150mm</span></div>
+          <div class="sc-item"><div class="sc-circle" style="width:44px;height:44px;"></div><span class="sc-label">200mm</span></div>
+          <div class="sc-item"><div class="sc-circle" style="width:56px;height:56px;"></div><span class="sc-label">250mm</span></div>
+          <div class="sc-item"><div class="sc-circle" style="width:70px;height:70px;"></div><span class="sc-label">315mm</span></div>
         </div>
-        <div class="t-card">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          "وصلت بسرعة، بارك الله فيكم، كي نركبها نصورها ونبعتهالكم."
-          <div class="name">— زبون من برج بوعريريج</div>
-        </div>
-        <div class="t-card">
-          <div class="stars">⭐⭐⭐⭐⭐</div>
-          "شكراً خويا، الله يفتح عليك، معاملة ماشاء الله."
-          <div class="name">— زبون من عين صالح</div>
+        <div class="space-list">
+          <div>100mm — تناسب مساحة 8–16 م² (غرفة، مكتب صغير، حمام)</div>
+          <div>125mm — تناسب مساحة 10–20 م² (محل صغير، كافيتيريا صغيرة، شقة)</div>
+          <div>150mm — تناسب مساحة 18–36 م² (مقهى، بيتزيريا صغيرة، مكتب متوسط)</div>
+          <div>200mm — تناسب مساحة 34–76 م² (مطعم متوسط، ورشة، فرن بيتزا)</div>
+          <div>250mm — تناسب مساحة 55–130 م² (صالة رياضية، مطعم كبير، قاعة أفراح صغيرة)</div>
+          <div>315mm — تناسب مساحة 90–200 م² (مستودع، صالة رياضية كبيرة، مطعم كبير جدًا)</div>
         </div>
       </div>
-    </div>
-    <div class="t-nav">
-      <button type="button" id="tPrev" aria-label="التقييم السابق">›</button>
-      <button type="button" id="tNext" aria-label="التقييم التالي">‹</button>
-    </div>
+    </details>
+
+    <details>
+      <summary>🔌 هل التركيب سهل؟</summary>
+      <div class="faq-answer">نعم، التركيب سهل ولا يحتاج خبرة خاصة.</div>
+    </details>
+
+    <details>
+      <summary>🔊 هل التوربين مزعج (يصدر ضجيجًا عاليًا)؟</summary>
+      <div class="faq-answer">لا، جميع المقاسات هادئة نسبيًا مقارنة بقوتها، وتتراوح نسبة الضجيج بين 25dB للمقاسات الصغيرة و66dB فقط للمقاسات الكبيرة جدًا (315mm) المخصصة للمستودعات.</div>
+    </details>
+
+    <details>
+      <summary>🛡️ ما هي مدة الضمان؟</summary>
+      <div class="faq-answer">
+        ضمان 12 شهرًا يغطي عيوب الصناعة، بالإضافة إلى إمكانية معاينة المنتج قبل الدفع.
+        <div class="faq-note">💰 السعر المعروض ثابت لكل الطلبات، ويُضاف إليه فقط سعر التوصيل حسب ولايتك، ويظهر تلقائيًا عند تعبئة نموذج الطلب.</div>
+      </div>
+    </details>
+
+    <details>
+      <summary>🚚 هل التوصيل متوفر في كل الولايات؟</summary>
+      <div class="faq-answer">نعم، نوصل إلى جميع ولايات الجزائر، مع خيار التوصيل للمنزل أو للمكتب حسب رغبتك.</div>
+    </details>
   </div>
 </div>
 
@@ -460,11 +500,14 @@ src="https://www.facebook.com/tr?id=1677998319917755&ev=PageView&noscript=1"
     pbTotal.textContent = (productTotal + deliveryPrice).toLocaleString('en-US') + " DA";
   }
 
+  const bestsellerBadge = document.getElementById('bestsellerBadge');
+  const BESTSELLER_SIZES = ['250mm - 34500 DA', '315mm - 43800 DA'];
   function updatePrice(){
     const unit = Number(sizeSel.options[sizeSel.selectedIndex].dataset.price);
     const total = unit * qty;
     displayPrice.textContent = total.toLocaleString('en-US') + " DA";
     updateBreakdown();
+    bestsellerBadge.style.display = BESTSELLER_SIZES.includes(sizeSel.value) ? 'block' : 'none';
   }
   sizeSel.addEventListener('change', updatePrice);
   wilayaSel.addEventListener('change', updateBreakdown);
@@ -502,36 +545,6 @@ src="https://www.facebook.com/tr?id=1677998319917755&ev=PageView&noscript=1"
   document.getElementById('carouselNext').addEventListener('click', () => goToSlide(currentIndex + 1));
   document.getElementById('carouselPrev').addEventListener('click', () => goToSlide(currentIndex - 1));
   setActiveDot(0);
-
-  // تقييمات العملاء: تحرك فقط عبر الأزرار (بدون سحب يدوي)
-  const tScroll = document.getElementById('tScroll');
-  const tCards = Array.from(tScroll.querySelectorAll('.t-card'));
-  let tIndex = 0;
-  function goToTestimonial(index){
-    tIndex = Math.max(0, Math.min(tCards.length - 1, index));
-    tCards[tIndex].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
-  }
-  document.getElementById('tNext').addEventListener('click', () => goToTestimonial(tIndex + 1));
-  document.getElementById('tPrev').addEventListener('click', () => goToTestimonial(tIndex - 1));
-
-  // عداد تنازلي حقيقي لنهاية العرض (تم تمديده يومًا إضافيًا)
-  const OFFER_END = new Date('2026-07-14T23:59:59+01:00').getTime();
-  const countdownEl = document.getElementById('countdownTimer');
-  function tickCountdown(){
-    const now = new Date().getTime();
-    const diff = OFFER_END - now;
-    if(diff <= 0){
-      countdownEl.textContent = 'انتهى العرض';
-      return;
-    }
-    const h = Math.floor(diff / (1000*60*60));
-    const m = Math.floor((diff % (1000*60*60)) / (1000*60));
-    const s = Math.floor((diff % (1000*60)) / 1000);
-    const pad = n => String(n).padStart(2,'0');
-    countdownEl.textContent = `${pad(h)}:${pad(m)}:${pad(s)}`;
-  }
-  tickCountdown();
-  setInterval(tickCountdown, 1000);
 
   const orderForm = document.getElementById('orderForm');
   orderForm.addEventListener('submit', function(e){
